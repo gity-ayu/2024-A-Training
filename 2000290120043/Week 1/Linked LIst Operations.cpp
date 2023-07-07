@@ -30,6 +30,11 @@ public:
 // function to insert at head
 void insertAtHead(Node* &head, int d)
 {
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
 	// new node create
 	Node* temp = new Node(d);
 	temp->next = head;
@@ -39,6 +44,12 @@ void insertAtHead(Node* &head, int d)
 // FUNCTION TO INSERT AT END
 void insertAtEnd(Node* &head, int d)
 {
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
+
 	Node* ptr = head;
 	while (ptr->next != NULL) {
 		ptr = ptr->next;
@@ -47,9 +58,15 @@ void insertAtEnd(Node* &head, int d)
 	ptr->next = temp;
 }
 
-// FUNCTION TO IMSERT AT A POSITION
+// FUNCTION TO InSERT AT A POSITION
 void insertAtPosition(Node* &head, int d, int pos)
 {
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
+
 	if (pos == 1) {
 		insertAtHead(head, d);
 		return;
@@ -120,7 +137,7 @@ int main()
 #endif
 
 
-	Node* node1 = new Node(10);
+	//Node* node1 = new Node(10);
 	Node* head = node1;
 
 	insertAtHead(head, 12);
