@@ -34,6 +34,11 @@ public:
 
 // function to insert at head
 void insertAtHead(Node* &head, int d) {
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
 	Node* temp = new Node(d);
 	temp->next = head;
 	head->prev = temp;
@@ -42,8 +47,13 @@ void insertAtHead(Node* &head, int d) {
 
 // FUNCTION TO INSERT AT END
 void insertAtEnd(Node* &head, int d) {
-	Node* ptr = head;
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
 
+	Node* ptr = head;
 	while (ptr->next != NULL) {
 		ptr = ptr->next;
 	}
@@ -153,14 +163,14 @@ int main()
 #endif
 
 
-	Node* node1 = new Node(10);
-	Node* head = node1;
+	// Node* node1 = new Node(10);
+	Node* head = NULL;
 
 	insertAtHead(head, 12);
 	insertAtEnd(head, 13);
 	insertAtEnd(head, 14);
 
-	insertAtPosition(head, 100, 5);
+	insertAtPosition(head, 100, 1);
 	cout << "BEFORE DELETION" << endl;
 	printList(head);
 	cout << endl;
