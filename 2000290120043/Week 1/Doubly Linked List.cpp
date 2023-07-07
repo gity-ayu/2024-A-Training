@@ -66,6 +66,12 @@ void insertAtEnd(Node* &head, int d) {
 // FUNCTION TO IMSERT AT A POSITION
 void insertAtPosition(Node* &head, int d, int pos)
 {
+	if (head == NULL) {
+		Node* temp = new Node(d);
+		head = temp;
+		return;
+	}
+	
 	if (pos == 1) {
 		// insert at head
 		Node* temp = new Node(d);
