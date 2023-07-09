@@ -1,0 +1,45 @@
+/******************************************************************************
+Linked List 1
+->Linear data structure used to store list of values
+->Array is single memory block while LL is multiple memory blocks linked together
+->Array is static sized while LL is dynamic
+->Array insertion/deletion is costly
+->Listnode: |Data|Next|
+->Head & Null:  |150|200| ->  |200|204| ->  |300|X|
+
+Types:
+    1. Singly :   |A|150|  ->  |B|154|
+    2. Doubly :   |X|A|150| <->   |146|B|154|
+    3. Circular
+    
+Implementation of Singly LL:
+
+class node{
+    int val;            <- any datatype
+    Node* next;
+};
+
+
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+        int val;
+        Node* next;
+
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+};
+
+int main()
+{
+    
+    Node* n=new Node(1);
+    cout<<n->val<<" "<<n->next<<endl;
+
+    return 0;
+}
