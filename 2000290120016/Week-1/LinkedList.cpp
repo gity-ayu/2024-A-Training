@@ -1,3 +1,12 @@
+/*
+    Code of Linked List
+    
+    By 
+    Ajay Varshney
+    2000290120016
+    CS 6A
+
+*/
 #include <iostream>
 
 using std::cin;
