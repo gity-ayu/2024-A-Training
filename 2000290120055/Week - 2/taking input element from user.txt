@@ -1,0 +1,21 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+import java.util.Stack;
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+         Scanner sc=new Scanner(System.in);
+        Stack<Integer> st=new Stack<>();
+       
+        int n;
+        System.out.println("enter the number of elements");
+         n=sc.nextInt();
+        for(int i=1;i<=n;i++){
+            int x=sc.nextInt();
+            st.push(x);
+        }
+        System.out.println("Elements of stack are"+st);
+        
+    }
+}
