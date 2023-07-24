@@ -1,0 +1,146 @@
+/******************************************************************************
+Linked List 3: Deletion
+
+#Start  : O(1)
+    |head| -> | | -> | | -> | | ->NULL
+    
+    |   | -> |head| -> | | -> | | ->NULL
+      |
+    temp
+
+#End    :O(n)
+    |head| -> | | -> | | -> | | ->NULL
+traverse till 2nd last node from head node using temp, 2nd last ke next ka next is NULL
+make 2nd last as NULL
+store last in temp and release it using free()
+
+
+#At kth position: O(n)
+                -1       0      +1
+    |head| -> |  | -> |  | -> |  | -> |  | -> |  | -> NULL
+                \     /
+                 |  |
+position -1 ko postion +1 pe point karana hoga
+traverse till position -1, pos(-1)->next=pos(-1)->next->next
+*******************************************************************************/
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+        int val;
+        Node* next;
+
+    Node(int data){
+        val=data;
+        next=NULL;
+    }
+};
+
+void insertAtHead(Node* &head,int val){
+    Node* new_node= new Node(val);
+    new_node->next= head;
+    head=new_node;
+}
+
+void insertAtEnd(Node* &head,int val){
+    Node* new_node=new Node(val);
+    Node* temp=head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next = new_node;  
+}
+
+void insertAtk(Node* &head,int val,int k){
+    Node* new_node= new Node(val);
+    Node* temp=head;
+    if (k==0){
+        insertAtHead(head,val);
+        return;
+    }
+    
+    int current_pos=0;
+    while(current_pos!=k-1){
+        temp=temp->next;
+        current_pos++;
+    }
+    
+    new_node->next=temp->next;
+    temp->next=new_node;
+}
+
+void update(Node* &head,int val,int k){
+    Node* temp = head;
+    int current_pos=0;
+    while(current_pos!=k){
+        temp=temp->next;
+        current_pos++;
+    }
+    temp->val=val;
+}
+
+void deleteAthead(Node* &head){
+    Node* temp=head;
+    head=head->next;
+    free(temp);
+}
+
+void deleteAtEnd(Node* &head){
+    Node* second_last=head;
+    while(second_last->next->next!=NULL){
+        second_last=second_last->next;
+    }
+    Node* temp=second_last->next;
+    second_last->next=NULL;
+    free(temp);
+}
+
+void deleteAtk(Node* &head,int k){
+    Node* prev=head;
+    if(k==0){
+        deleteAthead(head);
+        return;
+    }
+    int counter=0;
+    while(counter!=k-1){
+        prev=prev->next;
+        counter++;
+    }
+    Node* temp=prev->next;
+    prev->next=prev->next->next;
+    free(temp);
+} 
+
+void print(Node* head){
+    Node* temp=head;
+    while(temp!=NULL){
+        cout<<temp->val<<"->";
+        temp=temp->next;
+    }
+    cout<<"NULL"<<endl;
+    
+}
+
+
+int main()
+{
+    Node* head=NULL;
+    insertAtHead(head,0);
+    print(head);
+    insertAtHead(head,1);
+    insertAtEnd(head,2);
+    print(head);
+    insertAtk(head,3,2);
+    print(head);
+    // update(head,70,2);
+    // print(head);
+    // deleteAthead(head);
+    // print(head);
+    // deleteAtEnd(head);
+    // print(head);
+    deleteAtk(head,1);
+    print(head);
+    
+    return 0;
+}
