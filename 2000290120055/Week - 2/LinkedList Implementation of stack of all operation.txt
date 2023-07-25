@@ -1,0 +1,71 @@
+public class LinkedListStckImplementation{
+    public static class Node{
+        int data;
+        Node next;
+        Node(int data){
+            this.data=data;
+        }
+        
+    }
+    
+    
+  public static  class Stack{
+        Node head=null;
+        int Size=0;
+        
+        void push(int x){
+            Node tem=new Node(x);
+            tem.next=head;
+            head=tem;
+            Size++;
+            
+        }
+        void display(){
+            Node tem=head;
+            
+            while(tem!=null){
+                System.out.println(tem.data);
+                tem=tem.next;
+            }
+            
+            
+            
+            
+            
+        }
+        int size(){
+                return Size;
+            }
+            
+            
+            
+            
+            int pop(){
+                if(head==null){
+                    System.out.println("stack is empty");
+                    return -1;
+                }
+                int x=head.data;
+                head=head.next;
+                return x;
+            }
+        
+        
+        
+        
+    }
+    public static void main(String[] args){
+        Stack st=new Stack();
+        st.push(10);
+        st.push(80);
+        st.push(90);
+        st.display();
+        st.pop();
+        st.pop();
+        st.display();
+        System.out.println(st.size());
+        
+    }
+    
+    
+}

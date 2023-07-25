@@ -1,0 +1,27 @@
+import java.util.Stack;
+
+public class Main{
+    public static void main(String[] arg){
+        Stack<Integer> st=new Stack<>();
+        System.out.println(st.isEmpty());
+        
+        //performing push operation
+        st.push(10);
+        st.push(20);
+        st.push(30);
+        st.push(80);
+        System.out.println(st);
+        //performing pop operation
+        st.pop();
+         System.out.println(st);
+         st.peek();
+          System.out.println(st.peek());
+          System.out.println(st);
+          while(st.size()>1){
+              st.pop();
+          }
+          System.out.println(st.peek());
+          System.out.println(st); //stack is vacant only one element is left
+        
+    }
+}
