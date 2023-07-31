@@ -1,0 +1,53 @@
+public class Main{
+    
+   public static class LinkedList{
+       Node head=null;
+       Node tail=null;
+       void inserAtEnd(int data){
+           Node tem=new Node(10);
+           
+           if(head==null){
+               head=tem;
+               tail=tem;
+           }
+           else{
+           tail.next=null;
+           tail=tem;
+           }
+       }
+       
+       
+       void display(){
+           Node tem=head;
+           while(tem!=null){
+               System.out.print(head.data+" ");
+               tem=tem.next;
+           }
+           
+       }
+   }
+    
+    
+    public static class Node{
+        int data;
+        Node next;
+        
+        Node(int data){
+            this.data=data;
+        }
+    }
+    
+    
+    
+    
+    public static void main(String[] args){
+       LinkedList list=new LinkedList();
+       list.inserAtEnd(90);
+       list.inserAtEnd(80);
+       list.inserAtEnd(70);
+       list.inserAtEnd(60);
+       list.display();
+        
+        
+    }
+}
