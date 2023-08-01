@@ -1,0 +1,76 @@
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+class Node{
+
+public :
+
+int data;
+
+/* leaf */
+Node* left;
+Node* right;
+
+Node(int d, Node* l, Node* r){
+   data = d;
+   left = l;
+   right = r;
+}
+
+};
+
+void print_order(Node* root){
+
+  queue<Node*> q;
+  q.push(root);
+
+  while(true){
+
+     int length = q.size();
+
+     if(length == 0){
+	      break;
+     }
+
+     int i=0;
+
+     while(i<length){
+
+	Node* n = q.front();
+	cout<<n->data<<" ";
+
+	if(n->left != NULL){
+	  q.push(n->left);
+	}
+
+        if(n->right != NULL){
+	  q.push(n->right);
+	}
+
+	q.pop();
+	i++;
+
+   }
+
+   cout<<endl;
+
+ }
+
+}
+
+int main(){
+
+   Node* root;
+   root = new Node(1,NULL,NULL);
+   root->left = new Node(2,NULL,NULL);
+   root->right = new Node(3,NULL,NULL);
+   root->left->left = new Node(4,NULL,NULL);
+   root->left->right = new Node(5,NULL,NULL);
+   root->right->left = new Node(6,NULL,NULL);
+   root->right->right = new Node(7,NULL,NULL);
+   print_order(root);
+
+   return 0;
+}

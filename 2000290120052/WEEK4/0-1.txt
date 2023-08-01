@@ -1,0 +1,76 @@
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    // Go through each test case.
+    int t; cin >> t;
+    for(int tt = 0; tt < t; tt++)
+        {
+        // Read input
+        int knapsackCapacity; cin >> knapsackCapacity;
+        int numItems; cin >> numItems;
+        
+        vector<int> itemWeights(numItems);
+        vector<int> itemValues(numItems);
+
+        for(int i = 0; i < numItems; i++)
+            {
+            cin >> itemWeights[i];
+            cin >> itemValues[i];
+            }
+        
+        // Initialize a dp table. dp[i][j] = the max value we can have by the time we reach item i for knapsackWeight j
+        vector<vector<int>> dp(numItems+1);
+        for(int i = 0; i < dp.size(); i++)
+            {
+            vector<int> row(knapsackCapacity+1, 0);
+            dp[i] = row;
+            }
+        
+        // For each item...
+        for(int i = 0; i < dp.size(); i++)
+            {
+            int previousItem = i - 1;
+            int currentItem = i;
+            int itemValue = currentItem > 0 ? itemValues[i-1] : 0;
+            int itemWeight = currentItem > 0 ? itemWeights[i-1] : 0;
+            
+            // For each weight the knapsack can get too...
+            for(int knapsackWeight = 0; knapsackWeight < dp[currentItem].size(); knapsackWeight++)
+                {
+                // Figure out the max value the knapsack could be at this point.
+                
+                // We haven't seen any items yet, so the value is 0.
+                if(currentItem == 0) { dp[currentItem][knapsackWeight] = 0; }
+                
+                // The weight of the knapsack is 0, so we can't put any items in it, so the value is 0.
+                else if(knapsackWeight == 0) { dp[currentItem][knapsackWeight] = 0; }
+                
+                // This item would make us go over the weight limit, so we can't take it.
+                else if(knapsackWeight - itemWeight <= 0)
+                    {
+                    dp[currentItem][knapsackWeight] = dp[previousItem][knapsackWeight];
+                    }
+                
+                // This item can fit into the knapsack, so we need to decide if taking it is the best value.
+                else 
+                    {
+                    int takeItem = dp[previousItem][knapsackWeight-itemWeight] + itemValue;
+                    int dontTakeItem = dp[previousItem][knapsackWeight];
+                        
+                    // Choose the better value.
+                    dp[currentItem][knapsackWeight] = max(takeItem, dontTakeItem);
+                    }
+                }
+            }
+        
+        int maxValueThiefCanSteal = dp[numItems][knapsackCapacity];
+        
+        // Write output
+        cout << maxValueThiefCanSteal << endl;
+        }
+    
+    return 0;
+}
